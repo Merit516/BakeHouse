@@ -7,6 +7,7 @@ pipeline {
                 echo 'test'
                 sh "ls"
             }
+        }
             
             stage('build') {
             steps {
@@ -15,7 +16,7 @@ pipeline {
                       echo ${BUILD_NUMBER}
                 '''
             }
-            
+            }
             stage('deploy') {
             steps {
                 echo 'deploy'
