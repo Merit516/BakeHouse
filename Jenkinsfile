@@ -1,5 +1,5 @@
 pipeline {
-    agent {label 'iti-smart}
+    agent {label 'jenkins-slave'}
 
     stages {
         stage('test') {
