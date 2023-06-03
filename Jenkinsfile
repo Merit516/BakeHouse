@@ -30,7 +30,7 @@ pipeline {
             steps {
                 echo 'deploy'
                   script{
-                withCredentials([file(credentialsId:'jenkins-slvae-kubeconfig',variable: 'KUBECONFIG)]){
+                withCredentials([file(credentialsId:'jenkins-slvae-kubeconfig',variable: 'KUBECONFIG')]){
                  sh '''
                      kubectl apply -f Deployment --kubeconfig ${KUBECONFIG}                    '''
                     
