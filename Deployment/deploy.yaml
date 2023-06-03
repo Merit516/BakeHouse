@@ -15,7 +15,7 @@ spec:
         app: bakehouse
     spec:
       containers:
-      - image: merit237/backhousimagejenkins:vv${BUILD_NUMBER}
+      - image: merit237/backhousimagejenkins:v${BUILD_NUMBER}
         name: bakehouse
         imagePullPolicy: Always
         ports:
