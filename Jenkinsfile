@@ -17,7 +17,7 @@ pipeline {
                  sh '''
                     docker login -u ${USERNAME}  -p ${PASSWORD}
                     docker build -t merit237/backhousimagejenkins:v${BUILD_NUMBER} .
-                    docker push merit237/backhousimagejenkins:vv${BUILD_NUMBER}
+                    docker push merit237/backhousimagejenkins:v${BUILD_NUMBER}
                     '''
                     
                     
