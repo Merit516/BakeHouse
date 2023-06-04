@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo 'build'
                 script{
-                    if(params.ENV == "release" ){ 
+                    if(params.ENV == "release" ){
                             withCredentials([usernamePassword(credentialsId:'docker-hub-login',usernameVariable: 'USERNAME',passwordVariable:'PASSWORD')]){
                              sh '''
                                 docker login -u ${USERNAME}  -p ${PASSWORD}
