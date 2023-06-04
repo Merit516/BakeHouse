@@ -1,8 +1,6 @@
 pipeline {
     agent {label 'jenkins-slave'}
-    parameters{
-            choice(name: 'ENV' ,choices:['dev','test','prod','relese'])
-    }
+   
     stages {
         stage('test') {
             steps {
@@ -15,7 +13,7 @@ pipeline {
             steps {
                 echo 'build'
                 script{
-                    if(params.ENV == "release" ){ 
+                   if (BRANCH_NAME == "dev" || BRANCH_NAME == "test" || BRANCH_NAME == "preprod") { 
                             withCredentials([usernamePassword(credentialsId:'docker-hub-login',usernameVariable: 'USERNAME',passwordVariable:'PASSWORD')]){
                              sh '''
                                 docker login -u ${USERNAME}  -p ${PASSWORD}
@@ -37,7 +35,7 @@ pipeline {
             steps {
                 echo 'deploy'
                   script{
-                 if(params.ENV == "dev" || params.ENV == "test" || params.ENV == "preprod") { 
+                  if (BRANCH_NAME == "release") { 
                                 withCredentials([file(credentialsId:'kubeconfig-slave-id',variable: 'KUBECONFIG')]){
                                  sh '''
                                      export BUILD_NUMBER=$(cat ../build.txt)
