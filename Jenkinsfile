@@ -27,6 +27,9 @@ pipeline {
 
                                     }
                              }
+                             else {
+                        echo "user choosed ${ENV}"
+                    }
                        }
                   }
             }
