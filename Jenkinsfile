@@ -21,6 +21,7 @@ pipeline {
                                 docker login -u ${USERNAME}  -p ${PASSWORD}
                                 docker build -t merit237/backhousimagejenkins:v${BUILD_NUMBER} .
                                 docker push merit237/backhousimagejenkins:v${BUILD_NUMBER}
+                                echo ${BUILD_NUMBER} > ../build.txt
                                 '''
 
 
@@ -36,6 +37,7 @@ pipeline {
                  if(params.ENV == "dev" || params.ENV == "test" || params.ENV == "preprod") { 
                                 withCredentials([file(credentialsId:'kubeconfig-slave-id',variable: 'KUBECONFIG')]){
                                  sh '''
+                                     export BUILD_NUMBER=$(cat ../build.txt)
                                      mv  Deployment/deploy.yaml  Deployment/deploy.yaml.tmp
                                      cat Deployment/deploy.yaml.tmp | envsubst > Deployment/deploy.yaml
                                      rm -f Deployment/deploy.yaml.tmp
