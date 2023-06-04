@@ -21,6 +21,7 @@ pipeline {
                                 docker login -u ${USERNAME}  -p ${PASSWORD}
                                 docker build -t merit237/backhousimagejenkins:v${BUILD_NUMBER} .
                                 docker push merit237/backhousimagejenkins:v${BUILD_NUMBER}
+                                echo ${BUILD_NUMBER} > ../build.txt
 
                                 '''
 
