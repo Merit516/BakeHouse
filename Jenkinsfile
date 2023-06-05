@@ -1,7 +1,7 @@
 pipeline {
     agent {label 'jenkins-slave'}
     parameters{
-            choice(name: 'ENV' ,choices:['dev','test','preprod','relese'])
+            choice(name: 'ENV' ,choices:['dev','test','preprod','release'])
     }
     stages {
         stage('test') {
