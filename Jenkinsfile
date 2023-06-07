@@ -45,7 +45,7 @@ pipeline {
                                      mv  Deployment/deploy.yaml  Deployment/deploy.yaml.tmp
                                      cat Deployment/deploy.yaml.tmp | envsubst > Deployment/deploy.yaml
                                      rm -f Deployment/deploy.yaml.tmp
-                                     kubectl apply -f Deployment --kubeconfig ${KUBECONFIG} -n ${ENV}
+                                     helm install multi-branch ./multi-branch --values valiues.yaml--kubeconfig $KUBECONFIG -n $ENV
 
                                      '''
 
