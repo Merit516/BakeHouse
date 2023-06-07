@@ -1,7 +1,16 @@
 pipeline {
     agent {label 'jenkins-slave'}
+    environment {
+    ENV = [
+        'params1': 'dev',
+        
+        'params2': 'test',
+        'params3': 'release',
+        
+    ]
+}
     parameters{
-            choice(name: 'ENV' ,choices:['dev','test','preprod','release'])
+            choice(name: 'ENV' ,choices:['dev','test','release'])
     }
     stages {
         stage('test') {
@@ -38,7 +47,7 @@ pipeline {
             steps {
                 echo 'deploy'
                   script{
-                 if(params.ENV == "dev" || params.ENV == "test" || params.ENV == "preprod") { 
+                 if(params.ENV == "dev" || params.ENV == "test" ) { 
                                 withCredentials([file(credentialsId:'kubeconfig-slave-id',variable: 'KUBECONFIG')]){
                                  sh '''
                                      export BUILD_NUMBER=$(cat ../build.txt)
