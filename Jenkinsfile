@@ -24,7 +24,7 @@ pipeline {
             steps {
                 echo 'build'
                 script{
-                    if(params.ENV == "release" ){
+                    if('params3'){
                             withCredentials([usernamePassword(credentialsId:'docker-hub-login',usernameVariable: 'USERNAME',passwordVariable:'PASSWORD')]){
                              sh '''
                                 docker login -u ${USERNAME}  -p ${PASSWORD}
@@ -47,7 +47,7 @@ pipeline {
             steps {
                 echo 'deploy'
                   script{
-                 if(params.ENV == "dev" || params.ENV == "test" ) { 
+                 if('params1' ||'params2' ) { 
                                 withCredentials([file(credentialsId:'kubeconfig-slave-id',variable: 'KUBECONFIG')]){
                                  sh '''
                                      export BUILD_NUMBER=$(cat ../build.txt)
