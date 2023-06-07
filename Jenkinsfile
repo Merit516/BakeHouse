@@ -42,9 +42,9 @@ pipeline {
                                 withCredentials([file(credentialsId:'kubeconfig-slave-id',variable: 'KUBECONFIG')]){
                                  sh '''
                                      export BUILD_NUMBER=$(cat ../build.txt)
-                                     mv  Deployment/deploy.yaml  Deployment/deploy.yaml.tmp
-                                     cat Deployment/deploy.yaml.tmp | envsubst > Deployment/deploy.yaml
-                                     rm -f Deployment/deploy.yaml.tmp
+                                     mv  multi-branch/deploy.yaml  multi-branch/deploy.yaml.tmp
+                                     cat multi-branch/deploy.yaml.tmp | envsubst > multi-branch/deploy.yaml
+                                     rm -f multi-branch/deploy.yaml.tmp
                                      helm install multi-branch ./multi-branch --values values.yaml--kubeconfig $KUBECONFIG -n $ENV
 
                                      '''
