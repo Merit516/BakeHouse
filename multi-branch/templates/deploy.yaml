@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: {{ .Values.metadata.name }}
+  name:  {{.Values.metadata.name }}
+spec:
+  replicas:  {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app:  {{ .Values.metadata.name }} 
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app:  {{ .Values.metadata.name }}
+    spec:
+      containers:
+      - image: merit237/backhousimagejenkins:v2
+        name:  {{ .Values.metadata.name }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources: {}
+

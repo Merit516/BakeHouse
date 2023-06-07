@@ -1,10 +1,10 @@
-
 apiVersion: v1
 kind: Service
 metadata:
+  creationTimestamp: null
   labels:
-    app: myservice
-  name: myservice
+    app: {{ .Values.metadata.name }}
+  name: {{.Release.Name}}-{{ .Values.metadata.name }}
 spec:
   ports:
   - name: bakehouseport
@@ -12,7 +12,7 @@ spec:
     protocol: TCP
     targetPort: 80
   selector:
-    app: bakehouse
+    app: {{ .Values.metadata.name }}
   type: NodePort
 status:
   loadBalancer: {}
